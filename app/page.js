@@ -603,9 +603,9 @@ async function logout() {
               <Button disabled={saving}>{saving ? "Saving..." : "Log Call"}</Button>
             </form>
           </Card>
-        </div>
       </div>
     </div>
-    </div>
+   </div>
+  </div>
   );
 }
