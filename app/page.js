@@ -345,12 +345,11 @@ export default function MarketingAgencyCRM() {
             </Button>
 
             <Button
-              onClick={() =>
-                document
-                  .getElementById("add-lead-form")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
-            >
+              onClick={() => {
+  const form = document.getElementById("add-lead-form");
+  if (form) form.scrollIntoView({ behavior: "smooth", block: "start" });
+}}
+>
               <Plus className="mr-2 h-4 w-4" />
               Add Lead
             </Button>
@@ -609,8 +608,12 @@ export default function MarketingAgencyCRM() {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-2">
-          <Card id="add-lead-form">
-            <form onSubmit={addLead} className="space-y-4 p-5">
+          <Card>
+           <form
+  id="add-lead-form"
+  onSubmit={addLead}
+  className="space-y-4 p-5"
+>
               <div>
                 <h2 className="text-lg font-semibold">Add New Lead</h2>
                 <p className="text-sm text-slate-500">Creates a customer record in Supabase.</p>
