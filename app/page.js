@@ -423,7 +423,7 @@ export default function MarketingAgencyCRM() {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3">
-          <Card className="lg:col-span-2">
+          <Card className="lg:col-span-2 transition hover:-translate-y-0.5 hover:shadow-md">
             <div className="p-5">
               <div className="mb-4 flex items-center justify-between">
                 <div>
@@ -499,7 +499,7 @@ export default function MarketingAgencyCRM() {
             </div>
           </Card>
 
-          <Card>
+          <Card className="transition hover:-translate-y-0.5 hover:shadow-md">
             <div className="p-5">
               <div className="mb-4 flex items-center justify-between">
                 <div>
@@ -525,7 +525,7 @@ export default function MarketingAgencyCRM() {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-2">
-          <Card>
+          <Card className="transition hover:-translate-y-0.5 hover:shadow-md">
             <div className="p-5">
               <div className="mb-4 flex items-center justify-between">
                 <div>
@@ -561,7 +561,7 @@ export default function MarketingAgencyCRM() {
             </div>
           </Card>
 
-          <Card>
+          <Card className="transition hover:-translate-y-0.5 hover:shadow-md">
             <div className="p-5">
               <div className="mb-4 flex items-center justify-between">
                 <div>
