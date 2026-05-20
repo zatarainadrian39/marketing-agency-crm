@@ -371,7 +371,7 @@ export default function MarketingAgencyCRM() {
 
         <div className="grid gap-6 lg:grid-cols-3">
           <Card className="lg:col-span-2">
-            <div className="p-5">
+            <div className="p-6 space-y-4">
               <div className="mb-4 flex items-center justify-between">
                 <div>
                   <h2 className="text-lg font-semibold">Weekly Call Performance</h2>
@@ -397,7 +397,7 @@ export default function MarketingAgencyCRM() {
           </Card>
 
           <Card>
-            <div className="p-5">
+            <div className="p-6 space-y-4">
               <div className="mb-4 flex items-center justify-between">
                 <div>
                   <h2 className="text-lg font-semibold">Call Outcomes</h2>
