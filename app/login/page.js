@@ -26,9 +26,9 @@ export default function LoginPage() {
       setMessage(error.message);
       return;
     }
-
-    setMessage("Signed in. Loading CRM...");
-    window.location.assign("/");
+window.location.href = "/";
+    
+   
   }
 
   return (
