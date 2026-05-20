@@ -132,6 +132,15 @@ function todayKey(dateString) {
 }
 
 export default function MarketingAgencyCRM() {
+async function logout() {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  );
+
+  await supabase.auth.signOut();
+  window.location.href = "/login";
+}
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [query, setQuery] = useState("");
@@ -312,13 +321,22 @@ export default function MarketingAgencyCRM() {
               Live Next.js + Supabase starter CRM for customers, calls, agents, deals, pipeline, and sales analytics.
             </p>
           </div>
-          <div className="flex gap-3">
-            <Button variant="outline"><ClipboardList className="mr-2 h-4 w-4" /> Export Report</Button>
-            <Button onClick={() => document.getElementById("add-lead-form")?.scrollIntoView({ behavior: "smooth" })}>
-              <Plus className="mr-2 h-4 w-4" /> Add Lead
-            </Button>
-          </div>
-        </div>
+ <div className="flex gap-3">
+  <Button variant="outline">
+    <ClipboardList className="mr-2 h-4 w-4" />
+    Export Report
+  </Button>
+
+  <Button variant="outline" onClick={logout}>
+    Logout
+  </Button>
+
+  <Button onClick={() => document.getElementById("add-lead-form")?.scrollIntoView()}>
+    <Plus className="mr-2 h-4 w-4" /> Add Lead
+  </Button>
+</div>
+          
+        
 
         {message && <div className="rounded-2xl border border-slate-200 bg-white p-4 text-sm text-slate-700">{message}</div>}
 
@@ -587,6 +605,7 @@ export default function MarketingAgencyCRM() {
           </Card>
         </div>
       </div>
+    </div>
     </div>
   );
 }
