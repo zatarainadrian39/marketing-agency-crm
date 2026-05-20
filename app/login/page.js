@@ -3,22 +3,22 @@
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
-
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  async function signIn(e) {
-    e.preventDefault();
+  async function signIn(event) {
+    event.preventDefault();
     setMessage("Signing in...");
 
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    );
+
     const { error } = await supabase.auth.signInWithPassword({
-      email,
+      email: email.trim(),
       password,
     });
 
@@ -27,7 +27,8 @@ export default function LoginPage() {
       return;
     }
 
-    window.location.href = "/";
+    setMessage("Signed in. Loading CRM...");
+    window.location.assign("/");
   }
 
   return (
@@ -40,19 +41,21 @@ export default function LoginPage() {
           className="w-full border rounded-lg p-3 mb-3"
           placeholder="Email"
           type="email"
+          required
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(event) => setEmail(event.target.value)}
         />
 
         <input
           className="w-full border rounded-lg p-3 mb-4"
           placeholder="Password"
           type="password"
+          required
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(event) => setPassword(event.target.value)}
         />
 
-        <button className="w-full bg-black text-white rounded-lg p-3">
+        <button type="submit" className="w-full bg-black text-white rounded-lg p-3">
           Sign In
         </button>
 
