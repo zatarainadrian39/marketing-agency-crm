@@ -321,19 +321,31 @@ async function logout() {
               Live Next.js + Supabase starter CRM for customers, calls, agents, deals, pipeline, and sales analytics.
             </p>
           </div>
- <div className="flex gap-3">
-  <Button variant="outline">
-    <ClipboardList className="mr-2 h-4 w-4" />
-    Export Report
-  </Button>
+ <div className="mb-8 flex items-start justify-between gap-4">
+  <div>
+    <p className="text-sm text-slate-500">
+      Marketing Agency CRM
+    </p>
 
-  <Button variant="outline" onClick={logout}>
-    Logout
-  </Button>
+    <h1 className="mt-1 text-3xl font-bold tracking-tight">
+      Outbound Sales Command Center
+    </h1>
 
-  <Button onClick={() => document.getElementById("add-lead-form")?.scrollIntoView()}>
-    <Plus className="mr-2 h-4 w-4" /> Add Lead
-  </Button>
+    <p className="mt-2 max-w-2xl text-sm text-slate-600">
+      Live Next.js + Supabase starter CRM for customers, calls, agents,
+      deals, pipeline, and sales analytics.
+    </p>
+  </div>
+    <Button
+  onClick={() =>
+    document
+      .getElementById("add-lead-form")
+      ?.scrollIntoView({ behavior: "smooth" })
+  }
+>
+  <Plus className="mr-2 h-4 w-4" />
+  Add Lead
+</Button>
 </div>
           
         
