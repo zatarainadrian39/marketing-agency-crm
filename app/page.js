@@ -313,14 +313,7 @@ async function logout() {
   return (
     <div className="min-h-screen bg-slate-50 p-6 text-slate-950">
       <div className="mx-auto max-w-7xl space-y-6">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <p className="text-sm font-medium text-slate-500">Marketing Agency CRM</p>
-            <h1 className="mt-1 text-3xl font-bold tracking-tight">Outbound Sales Command Center</h1>
-            <p className="mt-2 max-w-2xl text-sm text-slate-600">
-              Live Next.js + Supabase starter CRM for customers, calls, agents, deals, pipeline, and sales analytics.
-            </p>
-          </div>
+        
  <div className="mb-8 flex items-start justify-between gap-4">
   <div>
     <p className="text-sm text-slate-500">
