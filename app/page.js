@@ -91,7 +91,7 @@ function Button({ children, className = "", variant = "solid", ...props }) {
 
 function StatCard({ icon: Icon, label, value, sub }) {
   return (
-    <Card>
+    <Card className="transition hover:-translate-y-0.5 hover:shadow-md">
       <div className="p-5">
         <div className="flex items-start justify-between gap-4">
           <div>
