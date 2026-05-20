@@ -68,7 +68,7 @@ const defaultCallForm = {
 
 function Card({ children, className = "" }) {
   return (
-    <div className={`rounded-2xl border border-slate-200 bg-white shadow-sm ${className}`}>
+    <div className={`rounded-3xl border border-slate-200/80 bg-white/90 shadow-sm backdrop-blur-sm transition hover:shadow-md ${className}`}>
       {children}
     </div>
   );
