@@ -320,9 +320,9 @@ export default function MarketingAgencyCRM() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 p-6 text-slate-950">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 p-4 text-slate-950 sm:p-6">
       <div className="mx-auto max-w-7xl space-y-6">
-        <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+        <div className="mb-8 flex flex-col gap-4 rounded-3xl border border-slate-200 bg-white/80 p-5 shadow-sm backdrop-blur lg:flex-row lg:items-center lg:justify-between">
           <div>
             <p className="text-sm text-slate-500">Marketing Agency CRM</p>
             <h1 className="mt-1 text-3xl font-bold tracking-tight">
