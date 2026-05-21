@@ -168,7 +168,11 @@ export default function MarketingAgencyCRM() {
         .limit(100),
       supabase.from("deals").select("*, customers(company_name), agents(name)").order("created_at", { ascending: false }),
     ]);
-
+const { data: appointmentRows } = await supabase
+  .from("appointments")
+  .select("*")
+  .order("appointment_date", { ascending: true })
+  .order("appointment_time", { ascending: true });
     const firstError =
       agentsResult.error || customersResult.error || callsResult.error || dealsResult.error;
 
@@ -179,6 +183,7 @@ export default function MarketingAgencyCRM() {
       setCustomers(customersResult.data || []);
       setCalls(callsResult.data || []);
       setDeals(dealsResult.data || []);
+      setAppointments(appointmentRows || []);
     }
 
     setLoading(false);
@@ -510,10 +515,27 @@ export default function MarketingAgencyCRM() {
     </div>
 
     <div className="space-y-3">
-      <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-500">
-        No appointments scheduled yet.
-      </div>
+  {appointments.length === 0 ? (
+    <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-500">
+      No appointments scheduled yet.
     </div>
+  ) : (
+    appointments.map((appt) => (
+      <div
+        key={appt.id}
+        className="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+      >
+        <p className="font-medium">
+          {appt.customer_name}
+        </p>
+
+        <p className="text-sm text-slate-500">
+          {appt.appointment_date} at {appt.appointment_time}
+        </p>
+      </div>
+    ))
+  )}
+</div>
   </div>
 </Card>
           <Card className="transition hover:-translate-y-0.5 hover:shadow-md">
