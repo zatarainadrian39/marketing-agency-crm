@@ -159,7 +159,16 @@ export default function MarketingAgencyCRM() {
     setLoading(true);
     setMessage("");
 
-    const [agentsResult, customersResult, callsResult, dealsResult] = await Promise.all([
+    const [
+  agentsResult,
+  customersResult,
+  callsResult,
+  dealsResult,
+  appointmentsResult
+] = await Promise.all([
+  supabase
+  .from("appointments")
+  .select("*"), 
       supabase.from("agents").select("*").order("name"),
       supabase.from("customers").select("*, agents(name)").order("created_at", { ascending: false }),
       supabase
@@ -169,14 +178,18 @@ export default function MarketingAgencyCRM() {
         .limit(100),
       supabase.from("deals").select("*, customers(company_name), agents(name)").order("created_at", { ascending: false }),
     ]);
-const { data: appointmentRows } = await supabase
+const { data: appointmentRows, error: appointmentsError } = await supabase
   .from("appointments")
   .select("*")
   .order("appointment_date", { ascending: true })
   .order("appointment_time", { ascending: true });
     const firstError =
-      agentsResult.error || customersResult.error || callsResult.error || dealsResult.error;
-
+  agentsResult.error ||
+  customersResult.error ||
+  callsResult.error ||
+  dealsResult.error ||
+  appointmentsError;
+    
     if (firstError) {
       setMessage(firstError.message);
     } else {
