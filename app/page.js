@@ -145,6 +145,7 @@ export default function MarketingAgencyCRM() {
   const [agents, setAgents] = useState([]);
   const [calls, setCalls] = useState([]);
   const [deals, setDeals] = useState([]);
+  const [appointments, setAppointments] = useState([]);
   const [leadForm, setLeadForm] = useState(defaultLeadForm);
   const [callForm, setCallForm] = useState(defaultCallForm);
   const [message, setMessage] = useState("");
@@ -183,6 +184,7 @@ const { data: appointmentRows } = await supabase
       setCustomers(customersResult.data || []);
       setCalls(callsResult.data || []);
       setDeals(dealsResult.data || []);
+      setAppointments([]);
     }
 
     setLoading(false);
