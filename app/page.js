@@ -168,7 +168,7 @@ export default function MarketingAgencyCRM() {
 ] = await Promise.all([
   supabase
   .from("appointments")
-  .select("*"), 
+  .select("*, agents(name)"),
       supabase.from("agents").select("*").order("name"),
       supabase
   .from("customers")
@@ -190,8 +190,7 @@ const { data: appointmentRows, error: appointmentsError } = await supabase
   agentsResult.error ||
   customersResult.error ||
   callsResult.error ||
-  dealsResult.error ||
-  appointmentsError;
+  dealsResult.error;
     
     if (firstError) {
       setMessage(firstError.message);
