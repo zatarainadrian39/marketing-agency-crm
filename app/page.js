@@ -183,7 +183,6 @@ const { data: appointmentRows } = await supabase
       setCustomers(customersResult.data || []);
       setCalls(callsResult.data || []);
       setDeals(dealsResult.data || []);
-      setAppointments(appointmentRows || []);
     }
 
     setLoading(false);
