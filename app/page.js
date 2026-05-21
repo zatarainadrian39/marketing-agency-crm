@@ -170,7 +170,10 @@ export default function MarketingAgencyCRM() {
   .from("appointments")
   .select("*"), 
       supabase.from("agents").select("*").order("name"),
-      supabase.from("customers").select("*, agents(name)").order("created_at", { ascending: false }),
+      supabase
+  .from("customers")
+  .select("*")
+  .order("created_at", { ascending: false }),
       supabase
         .from("calls")
         .select("*, customers(company_name), agents(name)")
