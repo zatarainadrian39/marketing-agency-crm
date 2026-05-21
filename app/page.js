@@ -145,7 +145,6 @@ export default function MarketingAgencyCRM() {
   const [agents, setAgents] = useState([]);
   const [calls, setCalls] = useState([]);
   const [deals, setDeals] = useState([]);
-  const [appointments, setAppointments] = useState([]);
   const [leadForm, setLeadForm] = useState(defaultLeadForm);
   const [callForm, setCallForm] = useState(defaultCallForm);
   const [message, setMessage] = useState("");
@@ -159,39 +158,24 @@ export default function MarketingAgencyCRM() {
     setLoading(true);
     setMessage("");
 
-    const [
-  agentsResult,
-  customersResult,
-  callsResult,
-  dealsResult,
-  appointmentsResult
-] = await Promise.all([
-  supabase
-  .from("appointments")
-  .select("*"),
+    const [agentsResult, customersResult, callsResult, dealsResult] = await Promise.all([
       supabase.from("agents").select("*").order("name"),
-      supabase
-  .from("customers")
-  .select("*")
-  .order("created_at", { ascending: false }),
+      supabase.from("customers").select("*, agents(name)").order("created_at", { ascending: false }),
       supabase
         .from("calls")
-        .select("*, customers(company_name, contact_name), agents(name)")
+        .select("*, customers(company_name), agents(name)")
         .order("created_at", { ascending: false })
         .limit(100),
       supabase.from("deals").select("*, customers(company_name), agents(name)").order("created_at", { ascending: false }),
     ]);
-const { data: appointmentRows, error: appointmentsError } = await supabase
+const { data: appointmentRows } = await supabase
   .from("appointments")
   .select("*")
   .order("appointment_date", { ascending: true })
   .order("appointment_time", { ascending: true });
     const firstError =
-  agentsResult.error ||
-  customersResult.error ||
-  callsResult.error ||
-  dealsResult.error;
-    
+      agentsResult.error || customersResult.error || callsResult.error || dealsResult.error;
+
     if (firstError) {
       setMessage(firstError.message);
     } else {
@@ -199,7 +183,6 @@ const { data: appointmentRows, error: appointmentsError } = await supabase
       setCustomers(customersResult.data || []);
       setCalls(callsResult.data || []);
       setDeals(dealsResult.data || []);
-      setAppointments(appointmentsResult.data || []);
     }
 
     setLoading(false);
@@ -325,9 +308,9 @@ const { data: appointmentRows, error: appointmentsError } = await supabase
 
   const filteredCustomers = customers.filter((customer) => {
     const owner = customer.agents?.name || "Unassigned";
-    const haystack = `${customer.company_name || ""} ${customer.contact_name || ""} ${customer.source || ""} ${customer.stage || ""}`;
+    const haystack = `${customer.company_name} ${customer.contact_name} ${customer.source} ${customer.stage} ${owner}`.toLowerCase();
     const matchesQuery = haystack.includes(query.toLowerCase());
-    const matchesAgent = true;
+    const matchesAgent = agentFilter === "All Agents" || owner === agentFilter;
     return matchesQuery && matchesAgent;
   });
 
@@ -495,7 +478,7 @@ const { data: appointmentRows, error: appointmentsError } = await supabase
                     {filteredCustomers.map((customer) => (
                       <tr key={customer.id} className="hover:bg-slate-50">
                         <td className="px-4 py-4">
-                          <p className="font-medium text-slate-950">{customer.company_name || customer.contact_name || "Unknown customer"}</p>
+                          <p className="font-medium text-slate-950">{customer.company_name}</p>
                           <p className="text-xs text-slate-500">{customer.contact_name} · {customer.phone}</p>
                           <p className="text-xs text-slate-400">{customer.source}</p>
                         </td>
