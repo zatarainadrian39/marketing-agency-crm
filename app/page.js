@@ -497,7 +497,25 @@ export default function MarketingAgencyCRM() {
               </div>
             </div>
           </Card>
+<Card className="transition hover:-translate-y-0.5 hover:shadow-md">
+  <div className="p-5">
+    <div className="mb-4 flex items-center justify-between">
+      <div>
+        <h2 className="text-lg font-semibold">Appointments Today</h2>
+        <p className="text-sm text-slate-500">
+          Scheduled appointments by client, time, and agent.
+        </p>
+      </div>
+      <CalendarDays className="h-5 w-5 text-slate-500" />
+    </div>
 
+    <div className="space-y-3">
+      <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-500">
+        No appointments scheduled yet.
+      </div>
+    </div>
+  </div>
+</Card>
           <Card className="transition hover:-translate-y-0.5 hover:shadow-md">
             <div className="p-5">
               <div className="mb-4 flex items-center justify-between">
