@@ -176,7 +176,7 @@ export default function MarketingAgencyCRM() {
   .order("created_at", { ascending: false }),
       supabase
         .from("calls")
-        .select("*, customers(company_name), agents(name)")
+        .select("*, customers(company_name, contact_name), agents(name)")
         .order("created_at", { ascending: false })
         .limit(100),
       supabase.from("deals").select("*, customers(company_name), agents(name)").order("created_at", { ascending: false }),
