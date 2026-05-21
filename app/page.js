@@ -168,7 +168,7 @@ export default function MarketingAgencyCRM() {
 ] = await Promise.all([
   supabase
   .from("appointments")
-  .select("*, agents(name)"),
+  .select("*"),
       supabase.from("agents").select("*").order("name"),
       supabase
   .from("customers")
@@ -199,7 +199,7 @@ const { data: appointmentRows, error: appointmentsError } = await supabase
       setCustomers(customersResult.data || []);
       setCalls(callsResult.data || []);
       setDeals(dealsResult.data || []);
-      setAppointments([]);
+      setAppointments(appointmentsResult.data || []);
     }
 
     setLoading(false);
