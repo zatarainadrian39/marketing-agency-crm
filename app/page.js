@@ -326,9 +326,9 @@ const { data: appointmentRows, error: appointmentsError } = await supabase
 
   const filteredCustomers = customers.filter((customer) => {
     const owner = customer.agents?.name || "Unassigned";
-    const haystack = `${customer.company_name} ${customer.contact_name} ${customer.source} ${customer.stage} ${owner}`.toLowerCase();
+    const haystack = `${customer.company_name || ""} ${customer.contact_name || ""} ${customer.source || ""} ${customer.stage || ""}`;
     const matchesQuery = haystack.includes(query.toLowerCase());
-    const matchesAgent = agentFilter === "All Agents" || owner === agentFilter;
+    const matchesAgent = true;
     return matchesQuery && matchesAgent;
   });
 
@@ -496,7 +496,7 @@ const { data: appointmentRows, error: appointmentsError } = await supabase
                     {filteredCustomers.map((customer) => (
                       <tr key={customer.id} className="hover:bg-slate-50">
                         <td className="px-4 py-4">
-                          <p className="font-medium text-slate-950">{customer.company_name}</p>
+                          <p className="font-medium text-slate-950">{customer.company_name || customer.contact_name || "Unknown customer"}</p>
                           <p className="text-xs text-slate-500">{customer.contact_name} · {customer.phone}</p>
                           <p className="text-xs text-slate-400">{customer.source}</p>
                         </td>
